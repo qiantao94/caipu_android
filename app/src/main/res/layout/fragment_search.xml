@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:padding="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="#4aa1ed"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:padding="5dp"
+                android:hint="搜索菜谱、食材"
+                android:textColorHint="#80bdf2"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:drawableLeft="@drawable/searchin" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
