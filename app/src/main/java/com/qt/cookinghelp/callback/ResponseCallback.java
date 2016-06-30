@@ -8,6 +8,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * Created by qiantao on 2016/6/24.
@@ -26,7 +27,7 @@ public abstract class ResponseCallback implements Callback {
                     onFailed((Exception) msg.obj);
                     break;
                 case CALLBACK_SUCCEED:
-                    onSucceed((String) msg.obj);
+                    onSucceed(msg.obj+"");
                     break;
             }
 

@@ -1,6 +1,7 @@
 package com.qt.cookinghelp.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,17 +69,9 @@ public class CookFragment extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String url = httpUtil.addFirstGP("list", "id", data.get(position).getId());
-        httpUtil.get(url, new ResponseCallback() {
-            @Override
-            public void onFailed(Exception e) {
-                Log.e("json", e + "");
-            }
-
-            @Override
-            public void onSucceed(String json) {
-                Log.i("json", json);
-            }
-        });
+        Intent intent = new Intent(getActivity(), CookListActivity.class);
+        intent.putExtra(CookListActivity.ITEM_ID, data.get(position).getId());
+        intent.putExtra(CookListActivity.TITLE_NAME, data.get(position).getName());
+        startActivity(intent);
     }
 }

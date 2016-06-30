@@ -1,5 +1,6 @@
 package com.qt.cookinghelp.utils;
 
+import com.qt.cookinghelp.base.Config;
 import com.qt.cookinghelp.callback.ResponseCallback;
 
 import java.util.concurrent.TimeUnit;

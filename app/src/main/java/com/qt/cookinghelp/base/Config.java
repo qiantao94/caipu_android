@@ -1,4 +1,4 @@
-package com.qt.cookinghelp.utils;
+package com.qt.cookinghelp.base;
 
 /**
  * Created by qiantao on 2016/6/24.
