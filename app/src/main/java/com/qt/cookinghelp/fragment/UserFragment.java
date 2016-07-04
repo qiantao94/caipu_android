@@ -1,4 +1,4 @@
-package com.qt.cookinghelp.view;
+package com.qt.cookinghelp.fragment;
 
 
 import android.os.Bundle;
@@ -12,12 +12,17 @@ import com.qt.cookinghelp.R;
 /**
  * Created by qiantao on 2016/6/27.
  */
-public class UserFragment extends Fragment {
+public class UserFragment extends LazyFragment {
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_user,null);
         return view;
+    }
+
+    @Override
+    protected void lazyLoad() {
+
     }
 }

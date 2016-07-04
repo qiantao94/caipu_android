@@ -1,11 +1,9 @@
-package com.qt.cookinghelp.view;
+package com.qt.cookinghelp.fragment;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.qt.cookinghelp.R;
+import com.qt.cookinghelp.activity.CookListActivity;
 import com.qt.cookinghelp.adapter.CookItemAdapter;
 import com.qt.cookinghelp.bean.CookClassifyBean;
-import com.qt.cookinghelp.callback.ResponseCallback;
 import com.qt.cookinghelp.utils.OKHttpUtil;
 
 import java.util.ArrayList;

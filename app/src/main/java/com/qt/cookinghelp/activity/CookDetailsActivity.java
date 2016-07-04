@@ -1,4 +1,4 @@
-package com.qt.cookinghelp.view;
+package com.qt.cookinghelp.activity;
 
 import android.net.Uri;
 import android.os.Build;

@@ -19,13 +19,16 @@
             android:background="#4aa1ed">
 
             <EditText
+                android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableLeft="@drawable/searchin"
                 android:hint="搜索菜谱、食材"
                 android:padding="5dp"
+                android:textColor="@color/white"
                 android:textColorHint="#80bdf2"
+                android:singleLine="true"
                 android:textCursorDrawable="@drawable/cursor_drawable" />
         </LinearLayout>
 

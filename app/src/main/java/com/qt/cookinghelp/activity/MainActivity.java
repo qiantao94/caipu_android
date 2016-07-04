@@ -1,4 +1,4 @@
-package com.qt.cookinghelp.view;
+package com.qt.cookinghelp.activity;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.ImageButton;
 
 import com.qt.cookinghelp.R;
 import com.qt.cookinghelp.adapter.ViewPagerAdapter;
+import com.qt.cookinghelp.fragment.CookFragment;
+import com.qt.cookinghelp.fragment.SearchFragment;
+import com.qt.cookinghelp.fragment.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
