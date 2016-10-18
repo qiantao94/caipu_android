@@ -18,7 +18,7 @@
 * [Palette取图片主色](https://github.com/bestTao/caipu_android/blob/master/app/src/main/java/com/qiantao/caicai/activity/CookDetailsActivity.java#L38)
 * RecyclerView及自定义的[ItemDecoration](https://github.com/bestTao/caipu_android/blob/master/app/src/main/java/com/qiantao/caicai/view/ItemDivider.java)
 
-* API来源：[天狗云API](http://www.tngou.net/doc/cook健康菜谱API接口)
+* API来源：[天狗云API](http://www.tngou.net/doc/cook)
 
 
 
