@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.qt.cookinghelp.view.NoScrollViewPager
-        android:id="@+id/vp_main"
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:elevation="1dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@{title}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                tools:text="分类" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <com.qiantao.caicai.view.NoScrollViewPager
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_tab"
+            android:layout_below="@+id/toolBar" />
 
         <LinearLayout
+            android:id="@+id/ll_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
+            android:elevation="2dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/ib_home"
+            <ImageView
+                android:id="@+id/iv_menu"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/btn_home_selector" />
+                android:onClick="@{clickListener}"
+                android:padding="5dp"
+                android:src="@drawable/selector_tab_menu" />
 
-            <ImageButton
-                android:id="@+id/ib_search"
+            <ImageView
+                android:id="@+id/iv_discovery"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/btn_search_selector" />
+                android:onClick="@{clickListener}"
+                android:padding="5dp"
+                android:src="@drawable/selector_tab_discovery" />
 
-            <ImageButton
-                android:id="@+id/ib_user"
+            <ImageView
+                android:id="@+id/iv_search"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/btn_user_selector" />
+                android:onClick="@{clickListener}"
+                android:padding="5dp"
+                android:src="@drawable/selector_tab_search" />
         </LinearLayout>
+    </RelativeLayout>
+</layout>
 
-</LinearLayout>

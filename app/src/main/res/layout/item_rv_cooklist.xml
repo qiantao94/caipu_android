@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cookDetail"
+            type="com.qiantao.caicai.entity.CookDetail" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_cook"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:transitionName="shareImg"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/iv_cook"
+                android:text="@{cookDetail.name}"
+                tools:text="菜名"
+                android:textColor="@color/primaryText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/iv_cook"
+                android:maxLines="1"
+                android:text="@{cookDetail.food}"
+                tools:text="荠菜 山药 烧开 倒入 高汤"
+                android:textColor="@color/secondaryText"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
