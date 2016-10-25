@@ -11,6 +11,8 @@
 * 根据菜谱名搜索菜谱
 
 ### 项目技术
+* Google MVVM 架构：[Data Binding Library](https://developer.android.com/topic/libraries/data-binding/index.html)
+
 * Retrofit+RxJava的网络请求，参考：[RxJava 与 Retrofit 结合的最佳实践](http://gank.io/post/56e80c2c677659311bed9841)
 
 * 共享元素动画
