@@ -1,3 +1,4 @@
+#### [微信小程序版点这里](https://github.com/bestTao/caipu_weixin)
 # Android App--健康菜谱
 
 基于Android的一个查找检索菜谱的应用
