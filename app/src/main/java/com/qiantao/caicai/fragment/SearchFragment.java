@@ -58,15 +58,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         mBinding.tvTips.setVisibility(View.INVISIBLE);
         mInputManager.hideSoftInputFromWindow(mBinding.etSearch.getWindowToken(), 0);
-        String text = mBinding.etSearch.getText().toString();
-        if (!"".equals(text)) {
-            mDialog = ProgressDialog.show(getActivity(), "", "正在搜索：" + text);
+        String inputStr = mBinding.etSearch.getText().toString();
+        if (!"".equals(inputStr)) {
+            mDialog = ProgressDialog.show(getActivity(), "", "正在搜索：" + inputStr);
             HttpSubscribe<CookList> subscribe = new HttpSubscribe<CookList>() {
                 @Override
                 public void onNext(CookList cookList) {
                     mDialog.dismiss();
-                    int size = cookList.getTngou().size();
-                    if (size == 0) {
+                    int fetchDataSize = cookList.getTngou().size();
+                    if (fetchDataSize == 0) {
                         mBinding.tvTips.setVisibility(View.VISIBLE);
                     } else {
                         Log.i(TAG, cookList.getTngou().size() + "");
@@ -81,7 +81,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     mDialog.dismiss();
                 }
             };
-            HttpMethod.getInstance().searchCook(subscribe, text);
+            HttpMethod.getInstance().searchCook(subscribe, inputStr);
         }
     }
 

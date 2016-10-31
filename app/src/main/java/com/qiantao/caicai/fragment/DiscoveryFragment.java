@@ -34,14 +34,14 @@ import static com.qiantao.caicai.activity.CookListActivity.DETAIL;
 /**
  * Created by qiantao on 2016/10/12.
  */
-public class DiscoveryFragment extends LazyFragment implements CookListAdapter.OnItemClickListener{
+public class DiscoveryFragment extends LazyFragment implements CookListAdapter.OnItemClickListener {
     private CookListAdapter mAdapter;
     private List<CookDetail> mList;
     private Intent mIntent;
     private int mItemCount;
     private int mPage = 1;
     private int mTotal;
-    private boolean isGetMore;
+    private boolean fetchingMore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class DiscoveryFragment extends LazyFragment implements CookListAdapter.O
         mAdapter = new CookListAdapter(getActivity(), mList);
         final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         binding.rvList.setLayoutManager(manager);
-        binding.rvList.addItemDecoration(new ItemDivider(getActivity(),LinearLayoutManager.VERTICAL));
+        binding.rvList.addItemDecoration(new ItemDivider(getActivity(), LinearLayoutManager.VERTICAL));
         binding.rvList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         binding.rvList.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -59,12 +59,12 @@ public class DiscoveryFragment extends LazyFragment implements CookListAdapter.O
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 mItemCount = manager.getItemCount();
                 int lastVisibleItem = manager.findLastVisibleItemPosition();
-                if (!isGetMore && mItemCount < mTotal && lastVisibleItem + 3 > mItemCount) {
+                if (!fetchingMore && mItemCount < mTotal && lastVisibleItem + 3 > mItemCount) {
                     Log.i(TAG, "滑动到底部");
                     mPage++;
-                    isGetMore = true;
+                    fetchingMore = true;
                     //加载下一页
-                    getCookList(mPage);
+                    fetchCookList(mPage);
                 }
             }
         });
@@ -76,14 +76,14 @@ public class DiscoveryFragment extends LazyFragment implements CookListAdapter.O
      */
     @Override
     protected void lazyLoad() {
-        getCookList(mPage);
+        fetchCookList(mPage);
     }
 
-    private void getCookList(final int page) {
+    private void fetchCookList(final int page) {
         HttpSubscribe<CookList> subscribe = new HttpSubscribe<CookList>() {
             @Override
             public void onNext(CookList cookList) {
-                isGetMore = false;
+                fetchingMore = false;
                 Log.i(TAG, "网络请求成功");
                 mList.addAll(cookList.getTngou());
                 Log.i(TAG, mTotal + "");
@@ -94,7 +94,7 @@ public class DiscoveryFragment extends LazyFragment implements CookListAdapter.O
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                isGetMore = false;
+                fetchingMore = false;
                 mPage--;
             }
         };
@@ -102,10 +102,10 @@ public class DiscoveryFragment extends LazyFragment implements CookListAdapter.O
     }
 
     @Override
-    public void onItemClick(View v, ImageView iv, Bitmap bitmap,int position) {
+    public void onItemClick(View v, ImageView iv, Bitmap bitmap, int position) {
         byte[] bitmapByte = CommonUtils.getInstance().bitmap2byte(bitmap);
         mIntent.putExtra(CookListActivity.BITMAP, bitmapByte);
-        mIntent.putExtra(DETAIL,mList.get(position));
+        mIntent.putExtra(DETAIL, mList.get(position));
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), iv, "shareImg");
         startActivity(mIntent, options.toBundle());
     }

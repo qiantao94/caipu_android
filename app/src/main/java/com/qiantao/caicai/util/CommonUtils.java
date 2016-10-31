@@ -10,7 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Created by Administrator on 2016/10/18.
+ * Created by qiantao on 2016/10/18.
  */
 
 public class CommonUtils {
