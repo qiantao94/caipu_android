@@ -10,22 +10,25 @@
             type="com.qiantao.caicai.entity.CookDetail" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appBarLayout"
+
+        <LinearLayout
+            android:id="@+id/ll_head"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:elevation="0dp">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:elevation="3dp">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/tb_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways"
+                android:background="@color/colorPrimary"
                 app:navigationIcon="@drawable/back">
 
                 <TextView
@@ -38,38 +41,29 @@
                     tools:text="电影" />
             </android.support.v7.widget.Toolbar>
 
-
-        </android.support.design.widget.AppBarLayout>
+            <ImageView
+                android:id="@+id/iv_cook_img"
+                android:layout_width="180dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:transitionName="@string/share_name" />
+        </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_below="@+id/ll_head"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:id="@+id/ll_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <RelativeLayout
-                    android:id="@+id/ll_head"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary">
-
-                    <ImageView
-                        android:id="@+id/iv_cook_img"
-                        android:layout_width="180dp"
-                        android:layout_height="120dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="@dimen/activity_horizontal_margin"
-                        android:fitsSystemWindows="true"
-                        android:scaleType="centerCrop"
-                        android:transitionName="shareImg" />
-                </RelativeLayout>
 
 
                 <TextView
@@ -123,5 +117,5 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
 </layout>

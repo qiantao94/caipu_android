@@ -27,27 +27,30 @@ import com.qiantao.caicai.http.HttpSubscribe;
 import com.qiantao.caicai.util.CommonUtils;
 import com.qiantao.caicai.view.ItemDivider;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * Created by qiantao on 2016/6/28.
+ * 菜单列表Activity
  */
+
 public class CookListActivity extends AppCompatActivity implements CookListAdapter.OnItemClickListener {
     private static final String TAG = "CookListActivity";
-    private ActivityCooklistBinding mBinding;
-    private int mMenuId;
-    private ArrayList<CookDetail> mList;
-    private CookListAdapter mAdapter;
-    private int mTotal;
-    private int mItemCount;
-    private Intent mIntent;
-    private int mPage = 1;
-    private boolean isGetMore;
     public static final String DETAIL = "detail";
     public static final String BITMAP = "bitmap";
+
+    private Intent mIntent;
+
+    private ActivityCooklistBinding mBinding;
+
+    private ArrayList<CookDetail> mListCooks;
+    private CookListAdapter mAdapter;
+    private int mCookSize;
+    private int mFecthedCount;
+    private boolean isFetchingMore;
+    private int mFecthPage = 1;
 
 
     @Override
@@ -59,64 +62,70 @@ public class CookListActivity extends AppCompatActivity implements CookListAdapt
 
     private void initData() {
         mIntent = new Intent(this, CookDetailsActivity.class);
-        mList = new ArrayList<>();
+        mListCooks = new ArrayList<>();
         final LinearLayoutManager manager = new LinearLayoutManager(this);
         mBinding.rvList.setLayoutManager(manager);
         mBinding.rvList.setItemAnimator(new DefaultItemAnimator());
         mBinding.rvList.addItemDecoration(new ItemDivider(this, LinearLayoutManager.VERTICAL));
         Intent intent = getIntent();
-        List<CookDetail> list = intent.getParcelableArrayListExtra(SearchFragment.RESULT);
-        if (list != null) {
+        List<CookDetail> listResults = intent.getParcelableArrayListExtra(SearchFragment.RESULT);
+        if (listResults != null) {
             mBinding.setTitle("搜索结果");
-            mList.addAll(list);
+            mListCooks.addAll(listResults);
         } else {
             mBinding.setTitle(intent.getStringExtra(MenuFragment.TITLE_NAME));
-            mMenuId = intent.getIntExtra(MenuFragment.ITEM_ID, 1);
+            final int menuId = intent.getIntExtra(MenuFragment.ITEM_ID, 1);
             mBinding.rvList.addOnScrollListener(new OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    mItemCount = manager.getItemCount();
+                    mFecthedCount = manager.getItemCount();
                     int lastVisibleItem = manager.findLastVisibleItemPosition();
-                    if (!isGetMore && mItemCount < mTotal && lastVisibleItem + 3 > mItemCount) {
+                    if (!isFetchingMore && mFecthedCount < mCookSize && lastVisibleItem + 3 > mFecthedCount) {
                         Log.i(TAG, "滑动到底部");
-                        mPage++;
-                        isGetMore = true;
+                        isFetchingMore = true;
                         //加载下一页
-                        getCookList(mPage);
+                        fetchCookList(++mFecthPage, menuId);
                     }
                 }
             });
-            getCookList(mPage);
+            fetchCookList(mFecthPage, menuId);
         }
-        mAdapter = new CookListAdapter(this, mList);
+        mAdapter = new CookListAdapter(this, mListCooks);
         mBinding.rvList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-        setSupportActionBar(mBinding.toolBar);
+        setSupportActionBar(mBinding.tbMain);
     }
 
-    private void getCookList(final int page) {
-        Log.i(TAG, "menu-id: " + mMenuId);
+    /**
+     * 进行网络请求获取菜谱数据列表
+     *
+     * @param page   页码
+     * @param menuId 菜单分类的id
+     */
+    private void fetchCookList(final int page, int menuId) {
+        Log.i(TAG, "menu-id: " + menuId);
         HttpSubscribe<CookList> subscribe = new HttpSubscribe<CookList>() {
             @Override
             public void onNext(CookList cookList) {
-                isGetMore = false;
+                isFetchingMore = false;
                 Log.i(TAG, "网络请求成功");
-                mList.addAll(cookList.getTngou());
-                Log.i(TAG, mTotal + "");
-                mAdapter.notifyItemInserted(mItemCount);
-                mTotal = cookList.getTotal();
+                mListCooks.addAll(cookList.getTngou());
+                Log.i(TAG, mCookSize + "");
+                mAdapter.notifyItemInserted(mFecthedCount);
+                mCookSize = cookList.getTotal();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                isGetMore = false;
-                mPage--;
+                isFetchingMore = false;
+                mFecthPage--;//请求失败，页码恢复
             }
         };
-        HttpMethod.getInstance().getCookList(subscribe, mMenuId, page);
+        HttpMethod.getInstance().fetchCookList(subscribe, menuId, page);
     }
 
+    //返回按钮的监听
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -131,8 +140,9 @@ public class CookListActivity extends AppCompatActivity implements CookListAdapt
     public void onItemClick(View v, ImageView iv, Bitmap bitmap, int position) {
         byte[] bitmapByte = CommonUtils.getInstance().bitmap2byte(bitmap);
         mIntent.putExtra(BITMAP, bitmapByte);
-        mIntent.putExtra(DETAIL, mList.get(position));
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, iv, "shareImg");
+        mIntent.putExtra(DETAIL, mListCooks.get(position));
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, iv,
+                getResources().getString(R.string.share_name));
         startActivity(mIntent, options.toBundle());
     }
 

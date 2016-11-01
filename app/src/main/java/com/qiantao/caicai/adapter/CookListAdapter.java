@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.qiantao.caicai.R;
-import com.qiantao.caicai.databinding.ItemRvCooklistBinding;
+import com.qiantao.caicai.databinding.ItemCookRvBinding;
 import com.qiantao.caicai.entity.CookDetail;
 import com.qiantao.caicai.http.HttpMethod;
 
@@ -22,29 +22,37 @@ import java.util.List;
 
 /**
  * Created by qiantao on 2016/10/13.
+ * 菜单列表的Adapter
  */
-
 public class CookListAdapter extends RecyclerView.Adapter<CookListAdapter.CookViewHolder> {
+
     private Context mContext;
-    private List<CookDetail> mList;
+    private List<CookDetail> mListCooks;
     private OnItemClickListener mListener;
 
+    /**
+     * RecyclerView的点击事件监听
+     */
     public interface OnItemClickListener {
         void onItemClick(View v, ImageView iv, Bitmap bitmap, int position);
     }
 
+    /**
+     * 给RecyclerView设置点击事件监听
+     * @param mListener 监听
+     */
     public void setOnItemClickListener(OnItemClickListener mListener) {
         this.mListener = mListener;
     }
 
-    public CookListAdapter(Context mContext, List<CookDetail> mList) {
+    public CookListAdapter(Context mContext, List<CookDetail> mListCooks) {
         this.mContext = mContext;
-        this.mList = mList;
+        this.mListCooks = mListCooks;
     }
 
     @Override
     public CookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CookViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_rv_cooklist, parent, false));
+        return new CookViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_cook_rv, parent, false));
     }
 
     @Override
@@ -54,11 +62,11 @@ public class CookListAdapter extends RecyclerView.Adapter<CookListAdapter.CookVi
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mListCooks.size();
     }
 
     class CookViewHolder extends RecyclerView.ViewHolder {
-        private ItemRvCooklistBinding mBinding;
+        private ItemCookRvBinding mBinding;
         private View mItemView;
         private Bitmap mBitmap;
 
@@ -69,9 +77,9 @@ public class CookListAdapter extends RecyclerView.Adapter<CookListAdapter.CookVi
         }
 
         private void bind(final int position) {
-            CookDetail detail = mList.get(position);
-            mBinding.setCookDetail(detail);
-            Glide.with(mContext).load(HttpMethod.IMG_URL_HEAD + detail.getImg())
+            CookDetail cookDetail = mListCooks.get(position);
+            mBinding.setCookDetail(cookDetail);
+            Glide.with(mContext).load(HttpMethod.IMG_URL_HEAD + cookDetail.getImg())
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.lodingimgfailed)

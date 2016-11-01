@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolBar"
+            android:id="@+id/tb_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/ll_tab"
-            android:layout_below="@+id/toolBar" />
+            android:layout_below="@+id/tb_main" />
 
         <LinearLayout
             android:id="@+id/ll_tab"

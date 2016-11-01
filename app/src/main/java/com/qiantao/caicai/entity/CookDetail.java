@@ -7,8 +7,9 @@ import android.os.Parcelable;
 
 /**
  * Created by qiantao on 2016/6/28.
+ * 菜单详情实体
  */
-public class CookDetail extends BaseObservable implements Parcelable{
+public class CookDetail extends BaseObservable implements Parcelable {
     private int id;
     private String name;//名称
     private String food;//食物
@@ -26,13 +27,13 @@ public class CookDetail extends BaseObservable implements Parcelable{
         name = in.readString();
         food = in.readString();
         img = in.readString();
-        images = in.readString();
-        description = in.readString();
+//        images = in.readString();
+//        description = in.readString();
         keywords = in.readString();
-        message = in.readString();
-        count = in.readInt();
-        fcount = in.readInt();
-        rcount = in.readInt();
+//        message = in.readString();
+//        count = in.readInt();
+//        fcount = in.readInt();
+//        rcount = in.readInt();
     }
 
     public static final Creator<CookDetail> CREATOR = new Creator<CookDetail>() {
@@ -175,12 +176,12 @@ public class CookDetail extends BaseObservable implements Parcelable{
         dest.writeString(name);
         dest.writeString(food);
         dest.writeString(img);
-        dest.writeString(images);
-        dest.writeString(description);
+//        dest.writeString(images);
+//        dest.writeString(description);
         dest.writeString(keywords);
-        dest.writeString(message);
-        dest.writeInt(count);
-        dest.writeInt(fcount);
-        dest.writeInt(rcount);
+//        dest.writeString(message);
+//        dest.writeInt(count);
+//        dest.writeInt(fcount);
+//        dest.writeInt(rcount);
     }
 }

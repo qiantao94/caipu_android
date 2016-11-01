@@ -3,7 +3,6 @@ package com.qiantao.caicai.http;
 import com.qiantao.caicai.entity.CookDetail;
 import com.qiantao.caicai.entity.CookList;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -16,18 +15,19 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by qiantao on 2016/10/13.
+ * 各个接口下的Http请求方法
  */
 
 public class HttpMethod {
     /**
      * 请求的基础url
      */
-    public static final String BASE_URL = "http://www.tngou.net/api/cook/";
+    private static final String BASE_URL = "http://www.tngou.net/api/cook/";
 
     public static final String IMG_URL_HEAD = "http://tnfs.tngou.net/image";
 
     /**
-     * 请求延时
+     * 请求延时 秒
      */
     private static final int DEFAULT_TIMEOUT = 5;
 
@@ -65,8 +65,8 @@ public class HttpMethod {
      * @param id    菜谱分类id
      * @param page  列表页数
      */
-    public void getCookList(Subscriber<CookList> subscriber, int id, int page) {
-        mService.getCookList(id,page)
+    public void fetchCookList(Subscriber<CookList> subscriber, int id, int page) {
+        mService.fetchCookList(id,page)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,8 +78,8 @@ public class HttpMethod {
      * @param subscriber 由调用者传来的观察者对象
      * @param id    菜谱id
      */
-    public void getCookDetail(Subscriber<CookDetail> subscriber, int id) {
-        mService.getCookDetail(id)
+    public void fetchCookDetail(Subscriber<CookDetail> subscriber, int id) {
+        mService.fetchCookDetail(id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,8 +91,8 @@ public class HttpMethod {
      * @param subscriber    由调用者传来的观察者对象
      * @param name  搜索名称
      */
-    public void searchCook(Subscriber<CookList> subscriber, String name) {
-        mService.searchCook(name)
+    public void searchCookByName(Subscriber<CookList> subscriber, String name) {
+        mService.searchCookByName(name)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

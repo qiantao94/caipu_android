@@ -26,7 +26,9 @@ import java.util.ArrayList;
 
 /**
  * Created by qiantao on 2016/10/12.
+ * 主界面下的搜索Fragment
  */
+
 public class SearchFragment extends Fragment implements View.OnClickListener {
     private FragmentSearchBinding mBinding;
     public static String TAG = "SearchFragment";
@@ -50,7 +52,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
      */
     private void setTipsColor() {
         SpannableString string = new SpannableString(mBinding.tvTips.getText());
-        CommonUtils.getInstance().setTextColor(string,9,12, R.color.colorPrimary);
+        CommonUtils.getInstance().setTextColor(string, 9, 12, getResources().getColor(R.color.colorPrimary));
         mBinding.tvTips.setText(string);
     }
 
@@ -81,7 +83,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     mDialog.dismiss();
                 }
             };
-            HttpMethod.getInstance().searchCook(subscribe, inputStr);
+            HttpMethod.getInstance().searchCookByName(subscribe, inputStr);
         }
     }
 

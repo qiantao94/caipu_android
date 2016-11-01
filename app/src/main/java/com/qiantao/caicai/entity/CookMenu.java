@@ -2,6 +2,7 @@ package com.qiantao.caicai.entity;
 
 /**
  * Created by qiantao on 2016/6/27.
+ * 菜谱的类别信息
  */
 public class CookMenu {
     private int id;

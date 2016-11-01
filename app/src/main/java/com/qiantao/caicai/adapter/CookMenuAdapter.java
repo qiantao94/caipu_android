@@ -8,42 +8,32 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.qiantao.caicai.R;
-import com.qiantao.caicai.databinding.ItemGvMenuBinding;
+import com.qiantao.caicai.databinding.ItemMenuGvBinding;
 import com.qiantao.caicai.entity.CookMenu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by qiantao on 2016/6/27.
+ * 菜单分类列表的Adapter
  */
 public class CookMenuAdapter extends BaseAdapter {
-    private Context mContext;
-    private List<CookMenu> mBean;
+    private List<CookMenu> mListMenus;
     private LayoutInflater mInflater;
-    private ItemGvMenuBinding mBinding;
 
-    public CookMenuAdapter(List<CookMenu> mBean, Context mContext) {
-        this.mContext = mContext;
-        this.mBean = getData(mBean);
-        mInflater = LayoutInflater.from(this.mContext);
-    }
-
-    public List<CookMenu> getData(List<CookMenu> bean) {
-        if (bean == null) {
-            bean = new ArrayList<>();
-        }
-        return bean;
+    public CookMenuAdapter(List<CookMenu> mListMenus, Context mContext) {
+        this.mListMenus = mListMenus;
+        mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public int getCount() {
-        return mBean.size();
+        return mListMenus.size();
     }
 
     @Override
     public CookMenu getItem(int position) {
-        return mBean.get(position);
+        return mListMenus.get(position);
     }
 
     @Override
@@ -54,15 +44,16 @@ public class CookMenuAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CookMenu data = getItem(position);
+        ItemMenuGvBinding binding;
         if (convertView == null) {
-            mBinding = DataBindingUtil.inflate(mInflater, R.layout.item_gv_menu, parent, false);
-            convertView = mBinding.getRoot();
-            convertView.setTag(mBinding);
+            binding = DataBindingUtil.inflate(mInflater, R.layout.item_menu_gv, parent, false);
+            convertView = binding.getRoot();
+            convertView.setTag(binding);
         } else {
-            mBinding = (ItemGvMenuBinding) convertView.getTag();
+            binding = (ItemMenuGvBinding) convertView.getTag();
         }
-        mBinding.tvName.setText(data.getName());
-        mBinding.ivIcon.setImageResource(data.getImgId());
+        binding.tvName.setText(data.getName());
+        binding.ivIcon.setImageResource(data.getImgId());
         return convertView;
     }
 

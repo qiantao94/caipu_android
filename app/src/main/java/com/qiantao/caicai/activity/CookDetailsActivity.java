@@ -17,6 +17,7 @@ import com.qiantao.caicai.http.HttpSubscribe;
 
 /**
  * Created by qiantao on 2016/10/14.
+ * 菜谱详情页面
  */
 
 public class CookDetailsActivity extends AppCompatActivity {
@@ -27,28 +28,32 @@ public class CookDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cookdetails);
-        setSupportActionBar(mBinding.toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setSupportActionBar(mBinding.tbMain);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         CookDetail detail = getIntent().getParcelableExtra(CookListActivity.DETAIL);
         mBinding.setDetail(detail);
         byte[] bis = getIntent().getByteArrayExtra(CookListActivity.BITMAP);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bis, 0, bis.length);
-        mBinding.ivCookImg.setImageBitmap(bitmap);
-        // 取图片主色作背景
-        Palette.Builder builder = Palette.from(bitmap);
-        builder.generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-                Palette.Swatch swatch = palette.getMutedSwatch();
-                if (swatch != null) {
-                    mBinding.toolbar.setBackgroundColor(swatch.getRgb());
-                    mBinding.llHead.setBackgroundColor(swatch.getRgb());
-                    getWindow().setStatusBarColor(swatch.getRgb());
-                } else {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        if (bitmap != null) {
+            mBinding.ivCookImg.setImageBitmap(bitmap);
+            // 取图片主色作背景
+            Palette.Builder builder = Palette.from(bitmap);
+            builder.generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    Palette.Swatch swatch = palette.getMutedSwatch();
+                    if (swatch != null) {
+                        mBinding.tbMain.setBackgroundColor(swatch.getRgb());
+                        mBinding.llHead.setBackgroundColor(swatch.getRgb());
+                        getWindow().setStatusBarColor(swatch.getRgb());
+                    } else {
+                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+                    }
                 }
-            }
-        });
+            });
+        }
         getMessage(detail.getId());
     }
 
@@ -61,13 +66,14 @@ public class CookDetailsActivity extends AppCompatActivity {
         HttpSubscribe<CookDetail> subscribe = new HttpSubscribe<CookDetail>() {
             @Override
             public void onNext(CookDetail cookDetail) {
-                //设置菜谱详情信息
+                //设置菜谱详情信息，解析html格式的字符串
                 mBinding.tvMessage.setText(Html.fromHtml(cookDetail.getMessage()));
             }
         };
-        HttpMethod.getInstance().getCookDetail(subscribe, id);
+        HttpMethod.getInstance().fetchCookDetail(subscribe, id);
     }
 
+    //返回键监听事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

@@ -9,22 +9,23 @@ import rx.Observable;
 
 /**
  * Created by qiantao on 2016/10/13.
+ * http请求接口
  */
 
-public interface HttpService {
+interface HttpService {
     @GET("list")
-    Observable<CookList> getCookList(
+    Observable<CookList> fetchCookList(
             @Query("id") int id,
             @Query("page") int page
     );
 
     @GET("show")
-    Observable<CookDetail> getCookDetail(
+    Observable<CookDetail> fetchCookDetail(
             @Query("id") int id
     );
 
     @GET("name")
-    Observable<CookList> searchCook(
+    Observable<CookList> searchCookByName(
             @Query("name") String name
     );
 

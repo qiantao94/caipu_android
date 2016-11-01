@@ -20,17 +20,21 @@ import java.util.List;
 
 /**
  * Created by qiantao on 2016/10/12.
+ * 主界面下的菜单分类的Fragment
  */
 public class MenuFragment extends Fragment implements AdapterView.OnItemClickListener {
+
     public final static String ITEM_ID = "item_id";
     public static final String TITLE_NAME = "title_name";
-    private List<CookMenu> data;
-    private int[] cookIds = {1, 10, 15, 52, 62, 68, 75, 82, 98, 112, 147, 161, 218, 166, 182, 188,
+
+    private List<CookMenu> mListMenus;
+
+    private int[] mArrIds = {1, 10, 15, 52, 62, 68, 75, 82, 98, 112, 147, 161, 218, 166, 182, 188,
             192, 197, 202, 205, 212, 227, 132};
-    private String[] imgNames = {"美容", "减肥", "保健养生", "人群", "时节", "餐时", "器官", "调养",
+    private String[] mArrNames = {"美容", "减肥", "保健养生", "人群", "时节", "餐时", "器官", "调养",
             "肠胃消化", "孕产哺乳", "经期", "女性疾病", "男性", "呼吸道", "血管", "心脏", "肝胆脾胰",
             "神经系统", "口腔", "肌肉骨骼", "皮肤", "癌症", "其他"};
-    private int[] imgIds = {R.drawable.meirong, R.drawable.jianfei, R.drawable.jiankangyangsheng,
+    private int[] mImgRes = {R.drawable.meirong, R.drawable.jianfei, R.drawable.jiankangyangsheng,
             R.drawable.renqun, R.drawable.shijie, R.drawable.canshi, R.drawable.qiguan, R.drawable.tiaoyang,
             R.drawable.chagnweixiaohua, R.drawable.yunchanpuru, R.drawable.jingqi, R.drawable.nvxingjibing,
             R.drawable.nanxing, R.drawable.huxidao, R.drawable.xueguan, R.drawable.xinzang, R.drawable.gandanpiy,
@@ -40,20 +44,25 @@ public class MenuFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentMenuBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, null, false);
-        data = getData();
-        CookMenuAdapter adapter = new CookMenuAdapter(data, getActivity());
-        binding.gvMenu.setAdapter(adapter);
+        mListMenus = addMenus();
+        CookMenuAdapter menuAdapter = new CookMenuAdapter(mListMenus, getActivity());
+        binding.gvMenu.setAdapter(menuAdapter);
         binding.gvMenu.setOnItemClickListener(this);
         return binding.getRoot();
     }
 
-    private List<CookMenu> getData() {
+    /**
+     * 给菜单分类List添加数据
+     *
+     * @return 菜单分类List
+     */
+    private List<CookMenu> addMenus() {
         List<CookMenu> data = new ArrayList<>();
-        for (int i = 0; i < cookIds.length; i++) {
+        for (int i = 0; i < mArrIds.length; i++) {
             CookMenu bean = new CookMenu();
-            bean.setId(cookIds[i]);
-            bean.setImgId(imgIds[i]);
-            bean.setName(imgNames[i]);
+            bean.setId(mArrIds[i]);
+            bean.setImgId(mImgRes[i]);
+            bean.setName(mArrNames[i]);
             data.add(bean);
         }
         return data;
@@ -62,8 +71,8 @@ public class MenuFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), CookListActivity.class);
-        intent.putExtra(ITEM_ID, data.get(position).getId());
-        intent.putExtra(TITLE_NAME, data.get(position).getName());
+        intent.putExtra(ITEM_ID, mListMenus.get(position).getId());
+        intent.putExtra(TITLE_NAME, mListMenus.get(position).getName());
         startActivity(intent);
     }
 

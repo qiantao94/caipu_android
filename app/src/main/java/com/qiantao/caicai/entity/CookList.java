@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by qiantao on 2016/10/13.
+ * 获取菜谱列表返回的数据实体，包含菜谱详情的list
  */
 
 public class CookList extends BaseObservable {

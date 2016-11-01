@@ -6,6 +6,7 @@ import rx.Subscriber;
 
 /**
  * Created by qiantao on 2016/10/13.
+ * 进行Http请求的Subscribe
  */
 
 public abstract class HttpSubscribe<T> extends Subscriber<T> {
@@ -21,15 +22,17 @@ public abstract class HttpSubscribe<T> extends Subscriber<T> {
 
     /**
      * 请求失败
+     *
      * @param e 错误信息
      */
     @Override
     public void onError(Throwable e) {
-        Log.e(TAG, "subscribe 失败\n"+e.getMessage());
+        Log.e(TAG, "subscribe 失败\n" + e.getMessage());
     }
 
     /**
      * 请求结果
+     *
      * @param t 请求返回的数据
      */
     @Override

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by qiantao on 2016/6/27.
+ * ViewPager的Adapter
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragmentList;

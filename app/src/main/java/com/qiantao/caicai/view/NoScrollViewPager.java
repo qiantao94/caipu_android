@@ -7,7 +7,9 @@ import android.view.MotionEvent;
 
 /**
  * Created by qiantao on 2016/6/27.
+ * 不滚动的ViewPager
  */
+
 public class NoScrollViewPager extends ViewPager {
 
     public NoScrollViewPager(Context context, AttributeSet attrs) {
