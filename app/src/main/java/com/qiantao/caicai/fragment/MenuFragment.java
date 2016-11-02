@@ -29,12 +29,12 @@ public class MenuFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private List<CookMenu> mListMenus;
 
-    private int[] mArrIds = {1, 10, 15, 52, 62, 68, 75, 82, 98, 112, 147, 161, 218, 166, 182, 188,
+    private final int[] mArrIds = {1, 10, 15, 52, 62, 68, 75, 82, 98, 112, 147, 161, 218, 166, 182, 188,
             192, 197, 202, 205, 212, 227, 132};
-    private String[] mArrNames = {"美容", "减肥", "保健养生", "人群", "时节", "餐时", "器官", "调养",
+    private final String[] mArrNames = {"美容", "减肥", "保健养生", "人群", "时节", "餐时", "器官", "调养",
             "肠胃消化", "孕产哺乳", "经期", "女性疾病", "男性", "呼吸道", "血管", "心脏", "肝胆脾胰",
             "神经系统", "口腔", "肌肉骨骼", "皮肤", "癌症", "其他"};
-    private int[] mImgRes = {R.drawable.meirong, R.drawable.jianfei, R.drawable.jiankangyangsheng,
+    private final int[] mImgRes = {R.drawable.meirong, R.drawable.jianfei, R.drawable.jiankangyangsheng,
             R.drawable.renqun, R.drawable.shijie, R.drawable.canshi, R.drawable.qiguan, R.drawable.tiaoyang,
             R.drawable.chagnweixiaohua, R.drawable.yunchanpuru, R.drawable.jingqi, R.drawable.nvxingjibing,
             R.drawable.nanxing, R.drawable.huxidao, R.drawable.xueguan, R.drawable.xinzang, R.drawable.gandanpiy,

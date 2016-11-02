@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Caicai</string>
     <string name="share_name">shareImg</string>
+
+    <!--菜谱详情页面-->
+    <string name="keywords_title">关键词</string>
+    <string name="message_title">做&#032;&#032;&#032;&#032;法</string>
+
+    <!--菜谱搜索页面-->
+    <string name="hint">搜索菜名或食材</string>
+    <string name="tips">没有搜索结果，搜索红烧肉试试</string>
 </resources>

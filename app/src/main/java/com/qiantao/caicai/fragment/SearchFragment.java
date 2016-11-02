@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,8 +32,8 @@ import java.util.ArrayList;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
     private FragmentSearchBinding mBinding;
-    public static String TAG = "SearchFragment";
-    public static String RESULT = "result";
+    private static final String TAG = "SearchFragment";
+    public static final String RESULT = "result";
     private ProgressDialog mDialog;
     private Intent mIntent;
     private InputMethodManager mInputManager;
@@ -51,8 +52,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
      * 给Tips的部分文字上色
      */
     private void setTipsColor() {
-        SpannableString string = new SpannableString(mBinding.tvTips.getText());
-        CommonUtils.getInstance().setTextColor(string, 9, 12, getResources().getColor(R.color.colorPrimary));
+        SpannableString string = new SpannableString(getResources().getString(R.string.tips));
+        CommonUtils.getInstance().setTextColor(string, 9, 12, ContextCompat.getColor(getActivity(),R.color.colorPrimary));
         mBinding.tvTips.setText(string);
     }
 

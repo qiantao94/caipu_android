@@ -3,10 +3,14 @@ package com.qiantao.caicai.activity;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.MenuItem;
 
 import com.qiantao.caicai.R;
@@ -45,16 +49,22 @@ public class CookDetailsActivity extends AppCompatActivity {
                 public void onGenerated(Palette palette) {
                     Palette.Swatch swatch = palette.getMutedSwatch();
                     if (swatch != null) {
-                        mBinding.tbMain.setBackgroundColor(swatch.getRgb());
                         mBinding.llHead.setBackgroundColor(swatch.getRgb());
                         getWindow().setStatusBarColor(swatch.getRgb());
                     } else {
-                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+                        getWindow().setStatusBarColor(ContextCompat.getColor(CookDetailsActivity.this, R.color.colorPrimary));
                     }
                 }
             });
         }
         getMessage(detail.getId());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Thread.currentThread().getId();
+            }
+        },3000);
+
     }
 
     /**
@@ -67,7 +77,13 @@ public class CookDetailsActivity extends AppCompatActivity {
             @Override
             public void onNext(CookDetail cookDetail) {
                 //设置菜谱详情信息，解析html格式的字符串
-                mBinding.tvMessage.setText(Html.fromHtml(cookDetail.getMessage()));
+                Spanned message;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    message = Html.fromHtml(cookDetail.getMessage(), Html.FROM_HTML_MODE_LEGACY);
+                } else {
+                    message = Html.fromHtml(cookDetail.getMessage());
+                }
+                mBinding.tvMessage.setText(message);
             }
         };
         HttpMethod.getInstance().fetchCookDetail(subscribe, id);

@@ -28,7 +28,6 @@
                 android:id="@+id/tb_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
                 app:navigationIcon="@drawable/back">
 
                 <TextView
@@ -72,7 +71,7 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:text="关键词"
+                    android:text="@string/keywords_title"
                     android:textColor="@color/colorAccent"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -101,7 +100,7 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:text="做    法"
+                    android:text="@string/message_title"
                     android:textColor="@color/colorAccent"
                     android:textSize="25sp"
                     android:textStyle="bold" />

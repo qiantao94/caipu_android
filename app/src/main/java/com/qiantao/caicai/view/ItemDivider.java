@@ -83,10 +83,6 @@ public class ItemDivider extends RecyclerView.ItemDecoration {
 
     /**
      * 由于分割线的长宽高 使得item有偏移
-     * @param outRect
-     * @param view
-     * @param parent
-     * @param state
      */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {

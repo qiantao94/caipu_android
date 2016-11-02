@@ -2,32 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/iv_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/meirong" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/iconText"
-                android:textSize="16sp"
-                tools:text="美容" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/iconText"
+            android:textSize="16sp"
+            tools:text="美容"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/meirong"/>
     </LinearLayout>
 </layout>

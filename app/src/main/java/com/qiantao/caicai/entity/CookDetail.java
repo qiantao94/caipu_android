@@ -22,7 +22,7 @@ public class CookDetail extends BaseObservable implements Parcelable {
     private int fcount;//收藏数
     private int rcount;//评论读数
 
-    protected CookDetail(Parcel in) {
+    private CookDetail(Parcel in) {
         id = in.readInt();
         name = in.readString();
         food = in.readString();

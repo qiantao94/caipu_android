@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 
 public class CommonUtils {
     private static class SingletonHolder {
-        private static CommonUtils INSTANCE = new CommonUtils();
+        private static final CommonUtils INSTANCE = new CommonUtils();
     }
 
     public static CommonUtils getInstance() {

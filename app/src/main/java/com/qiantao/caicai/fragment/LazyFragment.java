@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
  */
 public abstract class LazyFragment extends Fragment {
 
-    protected boolean isVisibleToUser;
+//    protected boolean isVisibleToUser;
 
     /**
      * 在这里实现Fragment数据的缓加载.
@@ -19,10 +19,10 @@ public abstract class LazyFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (getUserVisibleHint()) {
-            this.isVisibleToUser = true;
+//            this.isVisibleToUser = true;
             onVisible();
         } else {
-            this.isVisibleToUser = false;
+//            this.isVisibleToUser = false;
             onInvisible();
         }
     }

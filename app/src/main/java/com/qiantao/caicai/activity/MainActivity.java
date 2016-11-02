@@ -22,7 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,ViewPager.OnPageChangeListener {
     private ActivityMainBinding mBinding;
     private static final String TAG = "MainActivity";
-    private String mTitleStrs[] = {"分类", "发现", "搜索"};
+    private final String mTitleStrs[] = {"分类", "发现", "搜索"};
     private List<ImageView> mTabs;
     private int mLastIndex;
 

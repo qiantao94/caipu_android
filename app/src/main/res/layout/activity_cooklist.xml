@@ -13,7 +13,6 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -26,7 +25,6 @@
                 android:id="@+id/tb_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:navigationIcon="@drawable/back"
                 app:title="@{title}"
@@ -38,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
+            android:background="@color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </android.support.design.widget.CoordinatorLayout>
 

@@ -2,6 +2,7 @@ package com.qiantao.caicai.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import java.util.List;
 public class CookMenuAdapter extends BaseAdapter {
     private List<CookMenu> mListMenus;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     public CookMenuAdapter(List<CookMenu> mListMenus, Context mContext) {
         this.mListMenus = mListMenus;
+        this.mContext = mContext;
         mInflater = LayoutInflater.from(mContext);
     }
 
@@ -53,7 +56,8 @@ public class CookMenuAdapter extends BaseAdapter {
             binding = (ItemMenuGvBinding) convertView.getTag();
         }
         binding.tvName.setText(data.getName());
-        binding.ivIcon.setImageResource(data.getImgId());
+        binding.tvName.setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(mContext, data.getImgId()), null, null);
         return convertView;
     }
 
