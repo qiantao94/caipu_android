@@ -13,12 +13,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.jakewharton.rxbinding.view.RxView;
 import com.qiantao.caicai.R;
 import com.qiantao.caicai.databinding.ItemCookRvBinding;
 import com.qiantao.caicai.entity.CookDetail;
 import com.qiantao.caicai.http.HttpMethod;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.functions.Action1;
 
 /**
  * Created by qiantao on 2016/10/13.
@@ -39,6 +43,7 @@ public class CookListAdapter extends RecyclerView.Adapter<CookListAdapter.CookVi
 
     /**
      * 给RecyclerView设置点击事件监听
+     *
      * @param mListener 监听
      */
     public void setOnItemClickListener(OnItemClickListener mListener) {
@@ -90,14 +95,17 @@ public class CookListAdapter extends RecyclerView.Adapter<CookListAdapter.CookVi
                             mBitmap = resource;
                         }
                     });
-            mItemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null) {
-                        mListener.onItemClick(v, mBinding.ivCook, mBitmap, position);
-                    }
-                }
-            });
+            //界面防抖动
+            RxView.clicks(mItemView)
+                    .throttleFirst(1, TimeUnit.SECONDS)
+                    .subscribe(new Action1<Void>() {
+                        @Override
+                        public void call(Void aVoid) {
+                            if (mListener != null) {
+                                mListener.onItemClick(mItemView, mBinding.ivCook, mBitmap, position);
+                            }
+                        }
+                    });
         }
     }
 }

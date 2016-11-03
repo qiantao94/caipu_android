@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.jakewharton.rxbinding.widget.RxAdapterView;
 import com.qiantao.caicai.R;
 import com.qiantao.caicai.activity.CookListActivity;
 import com.qiantao.caicai.adapter.CookMenuAdapter;
@@ -17,12 +18,15 @@ import com.qiantao.caicai.entity.CookMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.functions.Action1;
 
 /**
  * Created by qiantao on 2016/10/12.
  * 主界面下的菜单分类的Fragment
  */
-public class MenuFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MenuFragment extends Fragment {
 
     public final static String ITEM_ID = "item_id";
     public static final String TITLE_NAME = "title_name";
@@ -47,7 +51,18 @@ public class MenuFragment extends Fragment implements AdapterView.OnItemClickLis
         mListMenus = addMenus();
         CookMenuAdapter menuAdapter = new CookMenuAdapter(mListMenus, getActivity());
         binding.gvMenu.setAdapter(menuAdapter);
-        binding.gvMenu.setOnItemClickListener(this);
+        //GridView监听
+        RxAdapterView.itemClicks(binding.gvMenu)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer integer) {
+                        Intent intent = new Intent(getActivity(), CookListActivity.class);
+                        intent.putExtra(ITEM_ID, mListMenus.get(integer).getId());
+                        intent.putExtra(TITLE_NAME, mListMenus.get(integer).getName());
+                        startActivity(intent);
+                    }
+                });
         return binding.getRoot();
     }
 
@@ -68,12 +83,5 @@ public class MenuFragment extends Fragment implements AdapterView.OnItemClickLis
         return data;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), CookListActivity.class);
-        intent.putExtra(ITEM_ID, mListMenus.get(position).getId());
-        intent.putExtra(TITLE_NAME, mListMenus.get(position).getName());
-        startActivity(intent);
-    }
 
 }
