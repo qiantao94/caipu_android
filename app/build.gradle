@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
@@ -21,6 +22,13 @@ android {
     dataBinding {
         enabled true
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
@@ -38,4 +46,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt 'com.android.databinding:compiler:2.0.0-beta6'
+}
+repositories {
+    mavenCentral()
 }
