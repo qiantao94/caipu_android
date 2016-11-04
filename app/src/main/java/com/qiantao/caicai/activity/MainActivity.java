@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         mBinding.vpMain.setAdapter(adapter);
         mBinding.vpMain.addOnPageChangeListener(this);
-        mBinding.setClickListener(this);
+        mBinding.setClickListener(this);//为导航栏底部三个按钮设置
 
         //默认选中第一个fragment
         setCurrentPage(0);
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLastIndex = currentIndex;
     }
 
+    //底部导航栏三个按钮的点击监听
     @Override
     public void onClick(View v) {
         int currentIndex = mTabs.indexOf(v);
