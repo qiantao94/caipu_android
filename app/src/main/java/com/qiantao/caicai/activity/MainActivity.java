@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String mTitleStrs[] = {"分类", "发现", "搜索"};
     private List<ImageView> mTabs;
     private int mLastIndex;
+    //kotlin分之的改动
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
