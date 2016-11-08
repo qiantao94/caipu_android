@@ -10,4 +10,8 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
+    <style name="GuideTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_guide</item>
+    </style>
+
 </resources>

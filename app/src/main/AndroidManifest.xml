@@ -11,16 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".activity.MainActivity"
-            android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="adjustPan">
+        <activity android:name=".activity.GuideActivity"
+            android:theme="@style/GuideTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="adjustPan"/>
+
         <activity
             android:name=".activity.CookListActivity"
             android:screenOrientation="sensorPortrait" />
