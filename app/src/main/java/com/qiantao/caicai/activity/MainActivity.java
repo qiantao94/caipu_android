@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         mBinding.vpMain.setAdapter(adapter);
         mBinding.vpMain.addOnPageChangeListener(this);
-        mBinding.setClickListener(this);//为导航栏底部三个按钮设置
+        mBinding.setClickListener(this);//为导航栏底部三个按钮设置监听
 
         //默认选中第一个fragment
         setCurrentPage(0);
